@@ -8,12 +8,19 @@ const ably = new Ably.Realtime(ABLY_API_KEY);
 const whiteboardChannel = ably.channels.get('whiteboardChannel');
 const button = document.getElementById('button');
 const messageElement = document.getElementById('message');
+const colorPalette = document.getElementById('colorPalette');
+let selectedColor = '#000000'; // Default color
 
 canvas.id = 'whiteboardChannel';
+whiteboardChannel.subscribe('drawing', (message) => {
+    const data = message.data;
+    selectedColor = data.color;
+    drawLine(data.start, data.end, selectedColor);
+});
 
 // Function to draw a line on the canvas
-function drawLine(start, end) {
-    context.strokeStyle = '#000';
+function drawLine(start, end, color) {
+    context.strokeStyle = color;
     context.lineWidth = 2;
     context.lineCap = 'round';
 
@@ -30,10 +37,7 @@ whiteboardChannel.subscribe('message', (message) => {
 });
 
 // Subscribe to the 'drawing' channel
-whiteboardChannel.subscribe('drawing', (message) => {
-    const data = message.data;
-    drawLine(data.start, data.end);
-});
+
 
 // Click event listener for the button
 button.addEventListener('click', () => {
@@ -46,15 +50,22 @@ canvas.addEventListener('mousedown', (e) => {
     previousPosition = { x: e.clientX, y: e.clientY };
 });
 
+colorPalette.addEventListener('click', (e) => {
+    if (e.target.classList.contains('color')) {
+        selectedColor = e.target.getAttribute('data-color');
+    }
+});
+
+
+
 canvas.addEventListener('mousemove', (e) => {
     if (!drawing) return;
     const currentPosition = { x: e.clientX, y: e.clientY };
-    drawLine(previousPosition, currentPosition);
-
+    drawLine(previousPosition, currentPosition, selectedColor);
     // Publish the drawing data to Ably
-    whiteboardChannel.publish('drawing', { start: previousPosition, end: currentPosition });
-
+    whiteboardChannel.publish('drawing', { start: previousPosition, end: currentPosition, color: selectedColor });
     previousPosition = currentPosition;
+
 });
 
 canvas.addEventListener('mouseup', () => {
