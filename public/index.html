@@ -5,20 +5,53 @@
     <link rel="stylesheet" type="text/css" href="index.css" />
   </head>
   <body>
-  <canvas id="whiteboard" width="800" height="400"></canvas>
+  <canvas id="whiteboard" class="drawing-canvas" width="800" height="400"></canvas>
   <script src="https://cdn.ably.io/lib/ably.min-1.js"></script>
   <button id="button">Publish 123</button>
+  <button id="clearButton">Clear Whiteboard</button>
   <p id="message">Messages will be displayed here</p>
 
 
 <!--  <script src="../tools/pencil/pencil.js"></script>-->
 
   <div id="colorPalette">
-    <button class="color" data-color="#000000"></button>
-    <button class="color" data-color="#FF0000"></button>
-    <button class="color" data-color="#00FF00"></button>
-    <button class="color" data-color="#0000FF"></button>
+    <div id="colorPicker">
+      <button class="color" data-color="#000000" style="background-color: #000000;"></button>
+      <div id="colorList">
+        <button class="color" data-color="#FF0000" style="background-color: #FF0000;"></button>
+        <button class="color" data-color="#00FF00" style="background-color: #00FF00;"></button>
+        <button class="color" data-color="#0000FF" style="background-color: #0000FF;"></button>
+        <!-- Add more color buttons as needed -->
+      </div>
+      <div class="badge">Color</div>
+    </div>
+    <div id="drawingTools">
+      <button id="freehand">Freehand</button>
+      <button id="rectangle">Rectangle</button>
+      <button id="circle">Circle</button>
+      <button id="drawButton">Draw Rectangle</button>
+      <button id="brush">Brush</button>
+      <button id="gridButton">Toggle Grid</button>
+<!--      <button id="straightLine">Straight Line</button>-->
+
+
+    </div>
   </div>
+
+  <canvas
+          id="myCanvas"
+          width="300"
+          height="150"
+          style="border: 1px solid grey"
+  ></canvas>
+  <input type="range" id="brushSize" min="1" max="20" value="5">
+  <span id="brushSizeValue">10</span>
+
+  <canvas id="gridCanvas" class="drawing-canvas" width="800" height="400"></canvas>
+
+
+
+
 
   <script src="script.js"></script>
 

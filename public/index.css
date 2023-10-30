@@ -284,3 +284,81 @@ circle.opcursor {
         line-height: 10px;
     }
 }
+
+#colorPalette {
+    display: flex;
+    gap: 10px;
+}
+
+#colorPicker {
+    position: relative;
+    display: inline-block;
+}
+
+
+.color {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #fff;
+    cursor: pointer;
+    margin: 5px;
+}
+
+/* Add a hover effect to the color buttons */
+.color:hover {
+    border-width: 3px;
+}
+
+#colorList {
+    display: none;
+    position: absolute;
+    flex-direction: row;
+    top: 100%;
+    left: 0;
+    width: auto;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#colorPicker:hover #colorList {
+    display: flex;
+}
+
+.badge {
+    display: none;
+    background: #333;
+    color: #fff;
+    padding: 2px 5px;
+    font-size: 12px;
+    border-radius: 4px;
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#colorPicker:hover .badge {
+    display: block;
+}
+
+#whiteboard {
+    cursor: url('cursor.svg'), auto;
+    background-size: 20px 20px; /* Adjust the size based
+}
+
+#gridCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Ensure a higher z-index than the main canvas */
+}
+
+#whiteboard {
+    position: absolute; /* Ensure it's positioned the same way as the grid canvas */
+    top: 0;
+    left: 0;
+    z-index: 1; /* Lower z-index than the grid canvas */
+    pointer-events: none;
+}
