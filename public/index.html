@@ -1,59 +1,51 @@
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <title>Real-time Whiteboard</title>
-    <link rel="stylesheet" type="text/css" href="index.css" />
-  </head>
-  <body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Real-time Whiteboard</title>
+  <link rel="stylesheet" type="text/css" href="index.css" />
+</head>
+<body>
+<div id="canvas-container">
+  <div id="canvas-start-marker"></div>
   <canvas id="whiteboard" class="drawing-canvas" width="800" height="400"></canvas>
-  <script src="https://cdn.ably.io/lib/ably.min-1.js"></script>
-  <button id="button">Publish 123</button>
-  <button id="clearButton">Clear Whiteboard</button>
-  <p id="message">Messages will be displayed here</p>
+</div>
+<script src="https://cdn.ably.io/lib/ably.min-1.js"></script>
 
 
-<!--  <script src="../tools/pencil/pencil.js"></script>-->
+<div id = "sidebar">
+  <div id="drawingTools">
+    <button id="freehand" class="pencil-button"></button>
+    <button id="brush" class="brush-button"></button>
+    <button id="gridButton" class="grid-button"></button>
+    <button id="clearButton" class="clear-button"></button>
 
-  <div id="colorPalette">
-    <div id="colorPicker">
-      <button class="color" data-color="#000000" style="background-color: #000000;"></button>
-      <div id="colorList">
-        <button class="color" data-color="#FF0000" style="background-color: #FF0000;"></button>
-        <button class="color" data-color="#00FF00" style="background-color: #00FF00;"></button>
-        <button class="color" data-color="#0000FF" style="background-color: #0000FF;"></button>
-        <!-- Add more color buttons as needed -->
+    <div id="colorPalette">
+      <div id="colorPicker">
+        <button id = "buttonColorId" class="color" data-color="#000000" style="background-color: #000000;"></button>
+        <div id="colorList">
+          <button class="color" data-color="#000000" style="background-color: #000000;"></button>
+          <button class="color" data-color="#FF0000" style="background-color: #FF0000;"></button>
+          <button class="color" data-color="#00FF00" style="background-color: #00FF00;"></button>
+          <button class="color" data-color="#0000FF" style="background-color: #0000FF;"></button>
+          <button class="color" data-color="#800080" style="background-color: #800080;"></button> <!-- Purple color -->
+          <button class="color" data-color="#FFFF00" style="background-color: #FFFF00;"></button> <!-- Yellow color -->
+
+        </div>
       </div>
-      <div class="badge">Color</div>
     </div>
-    <div id="drawingTools">
-      <button id="freehand">Freehand</button>
-      <button id="rectangle">Rectangle</button>
-      <button id="circle">Circle</button>
-      <button id="drawButton">Draw Rectangle</button>
-      <button id="brush">Brush</button>
-      <button id="gridButton">Toggle Grid</button>
-<!--      <button id="straightLine">Straight Line</button>-->
+
+    <div id="brushSizeContainer">
+      <button id="brushSizeButton" class="brush-size-button"></button>
+        <input type="range" id="brushSize" min="1" max="20" value="5">
+        <output for="brushSize" class="brush-value">5</output>
+    </div>
 
 
-    </div>
   </div>
+<!--  <img id="logo"  src="Ably.png" alt="My Logo">-->
+</div>
 
-  <canvas
-          id="myCanvas"
-          width="300"
-          height="150"
-          style="border: 1px solid grey"
-  ></canvas>
-  <input type="range" id="brushSize" min="1" max="20" value="5">
-  <span id="brushSizeValue">10</span>
+<script src="script.js"></script>
 
-  <canvas id="gridCanvas" class="drawing-canvas" width="800" height="400"></canvas>
-
-
-
-
-
-  <script src="script.js"></script>
-
-  </body>
-  </html>
+</body>
+</html>

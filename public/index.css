@@ -244,8 +244,82 @@ input {
     display: block;
     border: 0;
     width: 100%;
-    margin: 0;
+    margin-top: 70px;
     background: transparent;
+}
+
+#brushSizeImg {
+    cursor: pointer;
+    width: 50px; /* Adjust the width as needed */
+    height: 60px; /* Adjust the height as needed */
+}
+
+#brushSizeImg:hover::after {
+    content: 'Pencil';
+    position: absolute;
+    left: 100%;
+    margin-left: 5px;
+    padding: 9px;
+    background-color: #333; /* Background color */
+    color: #fff; /* Text color */
+    border: 1px solid #333; /* Border color */
+    border-radius: 5px;
+    font-size: 16px;
+    opacity: 1;
+}
+
+
+
+#brushSizeContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 100px;
+}
+
+
+#brushSizeValueContainer {
+    position: relative;
+}
+
+#brushSize {
+    display: none;
+    position: absolute;
+    bottom: -15px;
+    margin-left: 10px;
+    transition-delay: 0.5s;
+}
+
+#brushSize::-webkit-slider-thumb::before {
+    content: attr(value);
+    position: absolute;
+    bottom: -30px; /* Adjust the position of the value display as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px; /* Adjust the font size as needed */
+    color: #3498db; /* Change the color of the value display */
+}
+
+
+#brushSizeContainer:hover #brushSize{
+    opacity: 1;
+    display: block;
+}
+
+#brushSize::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remove default styles on webkit browsers */
+    width: 20px; /* Adjust the thumb size as needed */
+    height: 20px; /* Adjust the thumb size as needed */
+    background: #3498db; /* Change the color of the thumb */
+    border: 2px solid #2980b9; /* Add a border to the thumb */
+    border-radius: 50%; /* Make the thumb circular */
+    cursor: pointer;
+}
+
+#brushSizeValue {
+    margin-top: 5px; /* Adjust the margin-top as needed */
+    font-size: 18px; /* Adjust the font size as needed */
+    color: #3498db; /* Change the color of the label */
 }
 
 line {
@@ -285,16 +359,195 @@ circle.opcursor {
     }
 }
 
-#colorPalette {
-    display: flex;
-    gap: 10px;
+
+
+
+#drawingTools {
+    position: fixed;
+    top: 0;
 }
+#colorPalette {
+    left: 0;
+}
+
+#drawingTools {
+    left: 20px; /* Adjust the distance from the left side as needed */
+}
+
+.pencil-button {
+    background: url('cursor.svg') no-repeat;
+    background-size: contain;
+    padding: 25px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.pencil-button:hover::after {
+    content: 'Pencil';
+    position: absolute;
+    left: 100%;
+    margin-left: 5px;
+    padding: 9px;
+    background-color: #333; /* Background color */
+    color: #fff; /* Text color */
+    border: 1px solid #333; /* Border color */
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+
+.brush-button {
+    background: url('brush.png') no-repeat;
+    background-size: contain; /* Scale the background image to fit the button */
+    padding: 22px; /* Add padding to adjust the size of the button */
+    border: none;
+    cursor: pointer;
+    margin-top: 80px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.brush-button:hover::after {
+    content: 'Brush';
+    position: absolute;
+    left: 100%;
+    margin-left: 5px;
+    padding: 9px;
+    background-color: #333; /* Background color */
+    color: #fff; /* Text color */
+    border: 1px solid #333; /* Border color */
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.grid-button {
+    background: url('grid.svg') no-repeat;
+    background-size: contain; /* Scale the background image to fit the button */
+    padding: 25px; /* Add padding to adjust the size of the button */
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    margin-top: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.grid-button:hover::after {
+    content: 'Grid';
+    position: absolute;
+    left: 100%;
+    margin-left: 5px;
+    padding: 9px;
+    background-color: #333; /* Background color */
+    color: #fff; /* Text color */
+    border: 1px solid #333; /* Border color */
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.clear-button {
+    background: url('clear.svg') no-repeat;
+    background-size: contain; /* Scale the background image to fit the button */
+    padding: 28px; /* Add padding to adjust the size of the button */
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    margin-top: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.clear-button:hover::after {
+    content: 'Clear';
+    position: absolute;
+    left: 100%;
+    margin-left: 5px;
+    padding: 9px;
+    background-color: #333; /* Background color */
+    color: #fff; /* Text color */
+    border: 1px solid #333; /* Border color */
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.brush-size-button {
+    background: url('scale.png') no-repeat;
+    background-size: contain; /* Scale the background image to fit the button */
+    padding: 25px; /* Add padding to adjust the size of the button */
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.brush-size-button:hover::after {
+    content: 'Size';
+    position: absolute;
+    left: 100%;
+    margin-left: -10px;
+    margin-top: -60px;
+    padding: 9px;
+    background-color: #333; /* Background color */
+    color: #fff; /* Text color */
+    border: 1px solid #333; /* Border color */
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#sidebar {
+    position: fixed;
+    top: 0;
+    margin-left: 10px;
+    left: 0;
+    width: 120px; /* Adjust the width as needed */
+    padding: 10px; /* Add some padding for spacing */
+}
+
+#sidebar button {
+    display: block;
+    margin-bottom: 10px;
+}
+
+
 
 #colorPicker {
     position: relative;
-    display: inline-block;
+    /*display: inline-block;*/
+    margin-top: 100px;
+    display: flex;
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    /*position: relative;*/
 }
 
+#colorPicker:hover:after {
+    content: 'Color';
+    position: absolute;
+    left: 100%;
+    margin-left: 0px;
+    padding: 9px;
+    background-color: #333; /* Background color */
+    color: #fff; /* Text color */
+    border: 1px solid #333; /* Border color */
+    border-radius: 5px;
+    font-size: 16px;
+}
 
 .color {
     width: 30px;
@@ -315,7 +568,6 @@ circle.opcursor {
     flex-direction: row;
     top: 100%;
     left: 0;
-    width: auto;
     background: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -345,15 +597,9 @@ circle.opcursor {
 
 #whiteboard {
     cursor: url('cursor.svg'), auto;
-    background-size: 20px 20px; /* Adjust the size based
+    background-size: 10px 10px;
 }
 
-#gridCanvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1; /* Ensure a higher z-index than the main canvas */
-}
 
 #whiteboard {
     position: absolute; /* Ensure it's positioned the same way as the grid canvas */
@@ -361,4 +607,28 @@ circle.opcursor {
     left: 0;
     z-index: 1; /* Lower z-index than the grid canvas */
     pointer-events: none;
+    margin-left: 10px;
+}
+
+#logo {
+    max-width: 100%; /* Limit the image width to the container width */
+    height: auto; /* Maintain the image's aspect ratio */
+    display: block; /* Prevent extra spacing below the image */
+    margin-top: 300px; /* Push the image to the bottom of the container */
+    background-color: white;
+}
+
+#drawingTools {
+    margin-top: 50px;
+}
+
+.button {
+    margin: 5px; /* Increase the margin between buttons */
+    border: 1px solid #ccc; /* Add a border to buttons */
+    border-radius: 5px;
+}
+
+.brush-value {
+    margin-top: 15px;
+    margin-left: 15px;
 }
