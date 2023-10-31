@@ -374,6 +374,7 @@ circle.opcursor {
     left: 20px; /* Adjust the distance from the left side as needed */
 }
 
+
 .pencil-button {
     background: url('cursor.svg') no-repeat;
     background-size: contain;
@@ -382,6 +383,7 @@ circle.opcursor {
     cursor: pointer;
     background-color: transparent;
     display: flex;
+    margin-top: 50px;
     align-items: center;
     justify-content: center;
     position: relative;
@@ -631,4 +633,17 @@ circle.opcursor {
 .brush-value {
     margin-top: 15px;
     margin-left: 15px;
+}
+
+#header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    size: 20px;
+}
+
+#ably-logo {
+    width: 150px; /* Adjust the width as needed */
+    height: auto; /* This maintains the aspect ratio */
+    margin-left: -20px;
 }

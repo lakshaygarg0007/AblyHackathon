@@ -1,51 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{language}}">
 <head>
-  <title>Real-time Whiteboard</title>
-  <link rel="stylesheet" type="text/css" href="index.css" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="landingPage.css" />
+    <link rel="icon" type="image/x-icon" sizes="16x16" href="favicon.ico" />
+    <link rel="apple-touch-icon" href="favicon.svg" />
+    <link rel="mask-icon" href="favicon.svg" color="black" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:url" content="https://wbo.ophir.dev" />
+    <meta property="og:image" content="{{baseUrl}}/favicon.svg" />
+    <link rel="canonical" href="?lang={{language}}" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#C4DFFF" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: url('back.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center 85px;
+        }
+    </style>
 </head>
+
 <body>
-<div id="canvas-container">
-  <div id="canvas-start-marker"></div>
-  <canvas id="whiteboard" class="drawing-canvas" width="800" height="400"></canvas>
+
+<!-- Navbar -->
+<header class="text-gray-600 body-font" style="text-align: center; background-color: #f5f5f5;">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+        <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" style="margin: 0 auto;">
+            <img src="Ably1.png" alt="Ably Logo" width="180" height="80" />
+        </a>
+    </div>
+</header>
+<div class="container px-5 py-5 mx-auto">
+    <div class="text-center mb-20">
+        <h1 class="sm:text-5xl text-2xl font-;a title-font text-gray-900 mb-4">AblyDraw</h1>
+        <p class="text-base sm:text-xl leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-500s">Bringing Real-Time Brilliance to Your Whiteboard with AblyDraw!</p>
+    </div>
 </div>
-<script src="https://cdn.ably.io/lib/ably.min-1.js"></script>
+
+<section class="text-gray-600 body-font">
+    <div class="container px-5 py-0 mx-auto">
 
 
-<div id = "sidebar">
-  <div id="drawingTools">
-    <button id="freehand" class="pencil-button"></button>
-    <button id="brush" class="brush-button"></button>
-    <button id="gridButton" class="grid-button"></button>
-    <button id="clearButton" class="clear-button"></button>
+        <div class="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 space-y-6">
+            <div class="p-5 md:w-1/3 flex flex-col text-center items-center">
+                <div class="flex-grow">
+                    <strong>AblyDraw's public board: where everyone collaborates creatively in a fleeting chaos</strong>
+                    <a href="/public" class="wbo-button"
+                    >Go to the public board</a
+                    >
 
-    <div id="colorPalette">
-      <div id="colorPicker">
-        <button id = "buttonColorId" class="color" data-color="#000000" style="background-color: #000000;"></button>
-        <div id="colorList">
-          <button class="color" data-color="#000000" style="background-color: #000000;"></button>
-          <button class="color" data-color="#FF0000" style="background-color: #FF0000;"></button>
-          <button class="color" data-color="#00FF00" style="background-color: #00FF00;"></button>
-          <button class="color" data-color="#0000FF" style="background-color: #0000FF;"></button>
-          <button class="color" data-color="#800080" style="background-color: #800080;"></button> <!-- Purple color -->
-          <button class="color" data-color="#FFFF00" style="background-color: #FFFF00;"></button> <!-- Yellow color -->
+                </div>
+            </div>
+            <div class="p-5 md:w-1/3 flex flex-col text-center items-center">
+
+            </div>
+            <div class="p-4 md:w-1/3 flex flex-col text-center items-center">
+                <div class="flex-grow">
+                    <p>
+                        <label for="board"
+                        ><strong>
+
+                            Craft a private, custom URL board, shared only with those in the know on AblyDraw.</strong></label
+                        >
+                    </p>
+                    <form id="named-board-form" style="margin-top: 28px;"action="boards" method="GET">
+                        <input
+                                type="text"
+                                id="board"
+                                name="board"
+                                required
+                                placeholder="Board Name"
+                        />
+                        <input type="submit" value="Go"  />
+                    </form>
+                </div>
+            </div>
+
+            <script>
+                document.getElementById('named-board-form').addEventListener('submit', function (event) {
+                    event.preventDefault(); // Prevent the default form submission
+                    const boardName = document.getElementById('board').value; // Get the board name input value
+                    window.location.href = `/${boardName}`; // Redirect to the specified URL
+                });
+            </script>
 
         </div>
-      </div>
+
     </div>
 
-    <div id="brushSizeContainer">
-      <button id="brushSizeButton" class="brush-size-button"></button>
-        <input type="range" id="brushSize" min="1" max="20" value="5">
-        <output for="brushSize" class="brush-value">5</output>
-    </div>
-
-
-  </div>
-<!--  <img id="logo"  src="Ably.png" alt="My Logo">-->
-</div>
-
-<script src="script.js"></script>
-
+</section>
 </body>
 </html>

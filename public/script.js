@@ -7,11 +7,14 @@ canvas.height = window.innerHeight;
 
 const ABLY_API_KEY = 'vs0gFA.NbouvA:uZfEJWt8iSRmEGidwqVBUFyLK3kfis0FSCRwJ_qm5G4';
 const ably = new Ably.Realtime(ABLY_API_KEY);
-const whiteboardChannel = ably.channels.get('whiteboardChannel');
+const path = window.location.pathname;
+const pathSegments = path.split('/');
+const boardName = pathSegments[1];
+const whiteboardChannel = ably.channels.get(boardName);
 const colorPalette = document.getElementById('colorPalette');
 let selectedColor = '#000000';
 let mousedown = false;
-let last_mousex = last_mousey = 0;
+let last_mousex = 0, last_mousey = 0;
 let drawingTool = 'freehand'
 let brushSize = 5
 const brushSizeInput = document.getElementById('brushSize');
@@ -22,6 +25,8 @@ let mouseX, mouseY;
 const colorButtons = document.querySelectorAll('.color');
 const colorListButtons = document.querySelectorAll('#colorList .color');
 const forbiddenAreaWidth = 20
+const drawings = [];
+let previousPosition
 
 colorListButtons.forEach((button) => {
     button.addEventListener('click', (event) => {
@@ -90,6 +95,7 @@ whiteboardChannel.subscribe('brush', (message) => {
 canvas.id = 'whiteboardChannel';
 whiteboardChannel.subscribe('drawing', (message) => {
     const data = message.data;
+    drawings.push(data);
     selectedColor = data.color;
     context.strokeStyle = data.color;
     context.lineWidth = data.brushSizeV;

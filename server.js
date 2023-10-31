@@ -14,14 +14,23 @@ const ably = new Ably.Realtime({
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/config.js')));
+
+app.use('/script.js', express.static(path.join(__dirname, 'public/script.js'), {
+  'Content-Type': 'application/javascript'
+}));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
-app.use('/script.js', express.static(path.join(__dirname, 'public/script.js'), {
-  'Content-Type': 'application/javascript'
-}));
+app.get('/public', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/board.html'));
+});
+
+app.get('/:boardName', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/board.html'));
+});
 
 const whiteboardChannel = ably.channels.get('whiteboardChannel');
 
